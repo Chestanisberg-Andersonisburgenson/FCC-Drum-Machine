@@ -24,8 +24,8 @@ function App() {
           <audio id="X"  className="clip" src="https://cdn.freecodecamp.org/testable-projects-fcc/audio/RP4_KICK_1.mp3"/></button>
         <button className="drum-pad" id="9">C
           <audio id="C"  className="clip" src="https://cdn.freecodecamp.org/testable-projects-fcc/audio/Cev_H2.mp3"/></button>
-      <div id="display">
       </div>
+      <div id="display">
       </div>
     </div>   
   )
