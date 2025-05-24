@@ -1,7 +1,6 @@
 import './App.css'
 
 function App() {
-  const validKeys = new Set(['Q', 'W', 'E', 'A', 'S', 'D', 'Z', 'X', 'C']);
 
   document.querySelectorAll('.drum-pad').forEach((button) => {
     button.addEventListener('click', () => {
