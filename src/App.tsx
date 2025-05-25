@@ -14,7 +14,7 @@ const pads = [
 ];
 
 function App() {
-  // Effect for playing sounds when keys are pressed
+  //for playing sounds when keyboard keys are pressed
   useEffect(() => {
     const handleKeydown = (event: KeyboardEvent) => {
       const key = event.key.toUpperCase();
@@ -22,6 +22,8 @@ function App() {
       if (audio) {
         audio.currentTime = 0;
         audio.play();
+        const display = document.getElementById('display');
+        display!.textContent = `Playing: ${audio.id}`;
       }
     };
 
@@ -32,7 +34,7 @@ function App() {
     };
   }, []);
  
-  //effect for playing sounds when buttons are clicked
+  //for playing sounds when buttons are clicked
   const handleClick = (key: string) => {
     const audio = document.getElementById(key) as HTMLAudioElement | null;
     if (audio) {
