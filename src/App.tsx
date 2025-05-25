@@ -1,53 +1,74 @@
-import './App.css'
+import { useEffect } from 'react';
+import './App.css';
+
+const pads = [
+  { key: 'Q', src: 'https://cdn.freecodecamp.org/testable-projects-fcc/audio/Heater-1.mp3' },
+  { key: 'W', src: 'https://cdn.freecodecamp.org/testable-projects-fcc/audio/Heater-2.mp3' },
+  { key: 'E', src: 'https://cdn.freecodecamp.org/testable-projects-fcc/audio/Heater-3.mp3' },
+  { key: 'A', src: 'https://cdn.freecodecamp.org/testable-projects-fcc/audio/Heater-4_1.mp3' },
+  { key: 'S', src: 'https://cdn.freecodecamp.org/testable-projects-fcc/audio/Heater-6.mp3' },
+  { key: 'D', src: 'https://cdn.freecodecamp.org/testable-projects-fcc/audio/Dsc_Oh.mp3' },
+  { key: 'Z', src: 'https://cdn.freecodecamp.org/testable-projects-fcc/audio/Kick_n_Hat.mp3' },
+  { key: 'X', src: 'https://cdn.freecodecamp.org/testable-projects-fcc/audio/RP4_KICK_1.mp3' },
+  { key: 'C', src: 'https://cdn.freecodecamp.org/testable-projects-fcc/audio/Cev_H2.mp3' },
+];
 
 function App() {
-
-  document.querySelectorAll('.drum-pad').forEach((button) => {
-    button.addEventListener('click', () => {
-      const audio = button.querySelector('audio') as HTMLAudioElement | null;
+  // Effect for playing sounds when keys are pressed
+  useEffect(() => {
+    const handleKeydown = (event: KeyboardEvent) => {
+      const key = event.key.toUpperCase();
+      const audio = document.getElementById(key) as HTMLAudioElement | null;
       if (audio) {
         audio.currentTime = 0;
         audio.play();
       }
-    });
-  });
+    };
 
-  document.addEventListener("keydown", (event) => {
-    const key = event.key.toUpperCase();
+    document.addEventListener('keydown', handleKeydown);
+
+    return () => {
+      document.removeEventListener('keydown', handleKeydown);
+    };
+  }, []);
+ 
+  //effect for playing sounds when buttons are clicked
+  const handleClick = (key: string) => {
     const audio = document.getElementById(key) as HTMLAudioElement | null;
-    if (audio){
+    if (audio) {
       audio.currentTime = 0;
       audio.play();
+      const display = document.getElementById('display');
+      display!.textContent = `Playing: ${key}`;
     }
-  });
+  };
 
   return (
     <div id="drum-machine">
+      <h1>Drum Machine</h1>
       <div id="drum-pad">
-        <button className="drum-pad" id="Q-pad">Q
-          <audio id="Q" className="clip" src="https://cdn.freecodecamp.org/testable-projects-fcc/audio/Heater-1.mp3"/></button>
-        <button className="drum-pad" id="W-pad">W
-          <audio id="W"  className="clip" src="https://cdn.freecodecamp.org/testable-projects-fcc/audio/Heater-2.mp3"/></button>
-        <button className="drum-pad" id="E-pad">E
-          <audio id="E"  className="clip" src="https://cdn.freecodecamp.org/testable-projects-fcc/audio/Heater-3.mp3"/></button>
-        <button className="drum-pad" id="A-pad">A
-          <audio id="A"  className="clip" src="https://cdn.freecodecamp.org/testable-projects-fcc/audio/Heater-4_1.mp3"/></button>
-        <button className="drum-pad" id="S-pad">S
-          <audio id="S"  className="clip" src="https://cdn.freecodecamp.org/testable-projects-fcc/audio/Heater-6.mp3"/></button>
-        <button className="drum-pad" id="D-pad">D
-          <audio id="D"  className="clip" src="https://cdn.freecodecamp.org/testable-projects-fcc/audio/Dsc_Oh.mp3"/></button>
-        <button className="drum-pad" id="Z-pad">Z
-          <audio id="Z"  className="clip" src="https://cdn.freecodecamp.org/testable-projects-fcc/audio/Kick_n_Hat.mp3"/></button>
-        <button className="drum-pad" id="X-pad">X
-          <audio id="X"  className="clip" src="https://cdn.freecodecamp.org/testable-projects-fcc/audio/RP4_KICK_1.mp3"/></button>
-        <button className="drum-pad" id="C-pad">C
-          <audio id="C"  className="clip" src="https://cdn.freecodecamp.org/testable-projects-fcc/audio/Cev_H2.mp3"/></button>
+        {pads.map(pad => (
+          <button
+            key={pad.key}
+            className="drum-pad"
+            id={`${pad.key}-pad`}
+            onClick={() => handleClick(pad.key)}
+          >
+            {pad.key}
+            <audio
+              id={pad.key}
+              className="clip"
+              src={pad.src}
+            />
+          </button>
+        ))}
       </div>
-
-      <div id="display">
+      <div id="controls">
+        <p>Press a key or click a button to play a sound.</p>
+        <div id="display">Playing:</div>
       </div>
-    </div>   
-  )
+    </div>
+  );
 }
 
-export default App
+export default App;
