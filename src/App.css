@@ -1,6 +1,44 @@
 #root {
-  max-width: 1280px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 40%;
   margin: 0 auto;
   padding: 2rem;
+}
+
+#title {
   text-align: center;
+  font-size: 2rem;
+  color: #fff;
+  margin-bottom: 1rem;
+}
+
+#drum-pad {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  gap: 1rem;
+  padding: 1rem;
+}
+
+#container {
+  display: flex;
+  justify-content:space-around;
+  height: 100%;
+  width: 100%;
+  border: #ccc 1px solid;
+}
+
+.drum-pad {
+ font-size: large;
+}
+.drum-button:hover {
+  cursor: pointer;
+}
+
+#controls {
+  border-left: #ccc 1px solid;
+  padding: 1rem;
 }

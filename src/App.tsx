@@ -47,27 +47,29 @@ function App() {
 
   return (
     <div id="drum-machine">
-      <h1>Drum Machine</h1>
-      <div id="drum-pad">
-        {pads.map(pad => (
-          <button
-            key={pad.key}
-            className="drum-pad"
-            id={`${pad.key}-pad`}
-            onClick={() => handleClick(pad.key)}
-          >
-            {pad.key}
-            <audio
-              id={pad.key}
-              className="clip"
-              src={pad.src}
-            />
-          </button>
-        ))}
-      </div>
-      <div id="controls">
-        <p>Press a key or click a button to play a sound.</p>
-        <div id="display">Playing:</div>
+      <h1 id="title">Drum Machine</h1>   
+      <div id="container"> 
+        <div id="drum-pad">
+          {pads.map(pad => (
+            <button
+              key={pad.key}
+              className="drum-pad"
+              id={`${pad.key}-pad`}
+              onClick={() => handleClick(pad.key)}
+            >
+              {pad.key}
+              <audio
+                id={pad.key}
+                className="clip"
+                src={pad.src}
+              />
+            </button>
+          ))}
+        </div>
+        <div id="controls">
+          <p>Press a key or click a button to play a sound.</p>
+          <div id="display">Playing:</div>
+        </div>
       </div>
     </div>
   );
